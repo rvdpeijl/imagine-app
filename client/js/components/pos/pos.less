@@ -1,0 +1,102 @@
+.pos {
+
+    .product-button {
+        position: relative;
+        top: 0px;
+
+        background-color: #564f8a;
+        padding: 20px;
+        text-align: center;
+
+        border-radius: 5px;
+        border-bottom: 4px solid darken(#564f8a, 5%);
+
+        cursor: pointer;
+
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
+        .label {
+            color: #fff;
+            font-weight: 600;
+        }
+    }
+
+    .product-button:hover {
+        background-color: lighten(#564f8a, 5%);
+        border-bottom: 4px solid #564f8a;
+    }
+
+    .product-button:active {
+        top: 4px;
+        border-bottom: 0 solid darken(#564f8a, 5%);
+        background-color: darken(#564f8a, 5%);
+    }
+
+    .display-wrapper {
+
+        -webkit-box-shadow: 0 0 0 1px #E2E2E2;
+        -moz-box-shadow: 0 0 0 1px #E2E2E2;
+        box-shadow: 0 0 0 1px #E2E2E2;
+
+        border-radius: 3px;
+
+        .display {
+            padding: 20px 30px;
+            background-color: #fff;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+
+            overflow: auto;
+
+            .type {
+                font-size: 18px;
+                padding: 15px 0;
+                float: left;
+                color: #C8C8C8;
+            }
+
+            .total {
+                font-size: 40px;
+                float: right;
+                color: #C8C8C8;
+            }
+        }
+
+        .buttons {
+
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px;
+            overflow: hidden;
+            border-bottom: 2px solid darken(#5bbd72, 5%);
+
+            .button {
+                padding: 10px;
+                display: inline-block;
+                width: 50%;
+                float: left;
+
+                background-color: #5bbd72;
+                color: #fff;
+                cursor: pointer;
+
+                text-align: center;
+
+                &:first-of-type {
+                    border-right: 1px solid darken(#5bbd72, 5%);
+                }
+                
+                &:hover {
+                    background-color: lighten(#5bbd72, 5%);
+                }
+
+                &:active {
+                    background-color: darken(#5bbd72, 5%);
+                }
+            }
+        }
+    }
+
+}

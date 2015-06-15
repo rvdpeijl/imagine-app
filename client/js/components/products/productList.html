@@ -1,0 +1,52 @@
+<template name="productList">
+
+	<h2>Products</h2>
+    <p>Click a category to view products</p>
+
+    <div role="tabpanel">
+
+        <!-- Nav tabs -->
+	    <div class="tabs">
+			{{#each Categories}}
+			    <a href="#{{_id}}" class="btn btn-primary" aria-controls="{{_id}}" role="tab" data-toggle="tab">{{name}}</a>
+			{{/each}}
+        </div>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+	        {{#each Categories}}
+	            <div role="tabpanel" class="tab-pane" id="{{_id}}">
+	                <h5>{{name}}</h5>
+
+	                <table class="ui table">
+	                    <thead>
+	                    <tr>
+	                        <th>Name</th>
+	                        <th>Buy In</th>
+	                        <th>Selling</th>
+					        {{#if options.weighable}}<th>Joint Price</th>{{/if}}
+	                        <th>Created at</th>
+	                        <th>Updated at at</th>
+	                    </tr>
+	                    </thead>
+	                    <tbody>
+				        {{#each Products}}
+					        {{#if equals categoryId ../_id}}
+	                            <tr>
+	                                <td>{{name}}</td>
+	                                <td>{{locale.currency.symbol}}&nbsp;{{pricing.buyIn}}</td>
+	                                <td>{{locale.currency.symbol}}&nbsp;{{pricing.selling}}</td>
+							        {{#if ../options.weighable}}<td>{{locale.currency.symbol}}&nbsp;{{pricing.joint}}</td>{{/if}}
+	                                <td>{{dateToFormattedString this.createdAt}}</td>
+	                                <td>{{dateToFormattedString this.updatedAt}}</td>
+	                                <td><a id="deleteProduct" class="ui red basic button" data-id="{{this._id}}">Delete</a></td>
+	                            </tr>
+					        {{/if}}
+				        {{/each}}
+	                    </tbody>
+	                </table>
+	            </div>
+	        {{/each}}
+        </div>
+    </div>
+</template>

@@ -1,0 +1,40 @@
+<template name="authentication">
+    <form id="authenticationForm">
+
+        <div class="numPadWrapper">
+            <div class="numPad authenticationCode active">
+                <h2>Authentication Code</h2>
+                <input type="number" name="authenticationCode" id="authenticationCode" disabled/>
+                <div class="pad" data-number="1">1</div>
+                <div class="pad" data-number="2">2</div>
+                <div class="pad" data-number="3">3</div>
+                <div class="pad" data-number="4">4</div>
+                <div class="pad" data-number="5">5</div>
+                <div class="pad" data-number="6">6</div>
+                <div class="pad" data-number="7">7</div>
+                <div class="pad" data-number="8">8</div>
+                <div class="pad" data-number="9">9</div>
+                <div class="pad-clear">CLEAR</div>
+                <div class="pad" data-number="0">0</div>
+                <div class="pad-go">GO</div>
+            </div>
+
+            <div class="numPad pinCode">
+                <h2>Pincode</h2>
+                <input type="password" pattern="[0-9]*" name="pinCode" id="pinCode" disabled/>
+                <div class="pad" data-number="1">1</div>
+                <div class="pad" data-number="2">2</div>
+                <div class="pad" data-number="3">3</div>
+                <div class="pad" data-number="4">4</div>
+                <div class="pad" data-number="5">5</div>
+                <div class="pad" data-number="6">6</div>
+                <div class="pad" data-number="7">7</div>
+                <div class="pad" data-number="8">8</div>
+                <div class="pad" data-number="9">9</div>
+                <div class="pad-clear">CLEAR</div>
+                <div class="pad" data-number="0">0</div>
+                <button class="pad-go">GO</button>
+            </div>
+        </div>
+    </form>
+</template>

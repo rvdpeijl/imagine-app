@@ -1,0 +1,173 @@
+<template name="members">
+
+	<h1>Members</h1>
+
+    <div>
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addMemberModal">
+            Add Member
+        </button>
+
+        <!-- New Member Modal -->
+        <div class="modal fade" id="addMemberModal" tabindex="-1" role="dialog" aria-labelledby="addMemberModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    {{#if errors}}
+                        <div class="alert alert-danger" role="alert">
+                            <ul class="list">
+                                {{#each errors}}
+                                    <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    {{/if}}
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h2 class="modal-title" id="addMemberModalLabel">Add Member</h2>
+                    </div>
+                    <form id="newMember">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="memberId">Member ID*</label>
+                                <input type="number" min="1"  name="memberId" class="form-control memberId" id="memberId" placeholder="Member ID">
+                            </div>
+                            <div class="memberIdButtons">
+                                <div class="btn btn-info randomizeMemberId">Randomize</div>
+                                <div class="or"></div>
+                                <div class="btn btn-info pickNumber">Pick a number</div>
+                            </div>
+
+                            <div id="memberIdPicker">
+                                <div class="picker">
+                                    {{#each memberIdList}}
+                                        <div class="memberId {{this.className}}" data-member-id="{{this.id}}">
+                                            {{this.id}}
+                                        </div>
+                                    {{/each}}
+                                    <!-- Stuff will be rendered here -->
+                                </div>
+                            </div>
+
+                            <!-- Name -->
+                            <div class="form-group">
+                                <label for="firstName">First name</label>
+                                <input type="text" name="firstName" class="form-control" id="firstName">
+                            </div>
+                            <div class="form-group">
+                                <label for="middleName">Middle name</label>
+                                <input type="text" name="middleName" class="form-control" id="middleName">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last name</label>
+                                <input type="text" name="lastName" class="form-control" id="lastName">
+                            </div>
+                            <!-- -->
+
+                            <!-- Address -->
+                            <div class="form-group">
+                                <label for="streetName">Streetname</label>
+                                <input type="text" name="streetName" class="form-control" id="streetName">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="houseNumber">House number</label>
+                                <input type="text" name="houseNumber" class="form-control" id="houseNumber">
+                            </div>
+                            <div class="form-group">
+                                <label for="zipcode">Zipcode</label>
+                                <input type="text" name="zipcode" class="form-control" id="zipcode">
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" name="city" class="form-control" id="city">
+                            </div>
+                            <!-- -->
+
+                            <!-- Contact & Other details -->
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" class="form-control" id="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="inviter">Inviter</label>
+                                <input type="number" name="inviter" class="form-control" id="inviter">
+                            </div>
+                            <div class="form-group">
+                                <label for="notes">Notes</label>
+                                <textarea type="text" name="notes" class="form-control" id="notes"></textarea>
+                            </div>
+                            <!-- -->
+
+                            <!-- Identification -->
+                            <div class="form-group">
+                                <label for="dateOfBirth">Date of birth</label>
+                                <input type="text" name="dateOfBirth" class="form-control" id="dateOfBirth">
+                            </div>
+                            <div>
+                                <label>Gender</label>
+                                <select class="form-control" name="gender">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="idNumber">ID Number</label>
+                                <input type="text" name="idNumber" class="form-control" id="idNumber">
+                            </div>
+                            <div class="form-group">
+                                <label for="nifNie">NIF/NIE</label>
+                                <input type="text" name="nifNie" class="form-control" id="nifNie">
+                            </div>
+                            <!-- -->
+
+                            <!-- Credits & Discount -->
+                            <div class="form-group">
+                                <label for="credits">Starting Credits*</label>
+                                <input type="number" min="0"  name="credits" class="form-control" id="credits" value="20">
+                            </div>
+                            <div class="form-group">
+                                <label for="discountModifier">Discount</label>
+                                <input type="number" value="0" name="discountModifier" class="form-control" id="discountModifier">
+                            </div>
+                            <!-- -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button class="btn btn-primary button">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+	        <th>#</th>
+            <th>Name</th>
+            <th>Credits</th>
+            <th>Created at</th>
+            <th>Updated at</th>
+            <th width="100"></th>
+            <th width="100"></th>
+        </tr>
+        </thead>
+        <tbody>
+		{{#each members}}
+            <tr>
+	            <td>{{this.memberId}}</td>
+                <td>{{this.firstName}}</td>
+                <td>{{this.credits}}</td>
+                <td>{{dateToFormattedString this.createdAt}}</td>
+                <td>{{dateToFormattedString this.updatedAt}}</td>
+                <td><a id="viewMember" class="btn btn-xs btn-info" href="/members/{{this._id}}">View</a></td>
+                <td><a id="deleteMember" class="btn btn-xs btn-danger" data-id="{{this._id}}">Delete</a></td>
+            </tr>
+		{{/each}}
+        </tbody>
+    </table>
+
+</template>

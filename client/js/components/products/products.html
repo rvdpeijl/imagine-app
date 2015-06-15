@@ -1,0 +1,46 @@
+<template name="products">
+
+	<div id="products-container">
+		<div>
+            <form id="newProduct">
+	            <div class="form-group">
+                    <label for="productName">Name *</label>
+                    <input class="form-control" type="text" id="productName" name="productName"/>
+	            </div>
+                <div class="form-group">
+                    <label for="categoryId">Category *</label>
+                    <select class="form-control" name="categoryId" id="categoryId">
+                        <option selected="true" disabled="disabled">Select Category</option>
+	                    {{#each Categories}}
+                            <option value="{{_id}}">{{name}}</option>
+	                    {{/each}}
+                    </select>
+                </div>
+	            {{#if categorySelected}}
+                    <div class="form-group">
+                        <label for="buyInPrice">Buy-in price *</label>
+                        <input class="form-control" type="number" placeholder="0.00" step="any" id="buyInPrice" name="buyInPrice"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="sellingPrice">Selling price *</label>
+                        <input class="form-control" type="number" placeholder="0.00" step="any" id="sellingPrice" name="sellingPrice"/>
+                    </div>
+	                {{#if categoryIsWeighable}}
+                        <div class="form-group">
+                            <label for="jointPrice">Joint price *</label>
+                            <input class="form-control" type="number" placeholder="0.00" step="any" id="jointPrice" name="jointPrice"/>
+                        </div>
+	                {{/if}}
+                    <div class="ui input">
+                        <button class="btn btn-success">Add</button>
+                    </div>
+	            {{/if}}
+            </form>
+		</div>
+
+        <hr/>
+
+		{{> productList}}
+	</div>
+
+</template>

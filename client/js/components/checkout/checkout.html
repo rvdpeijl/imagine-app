@@ -1,0 +1,166 @@
+<template name="checkout">
+
+	<div id="checkout-container">
+
+        {{#if hasMemberId}}
+
+            <div class="row">
+                <!--
+
+                    Categories & products list
+
+                -->
+                <div class="col-md-4">
+                    <h3>Categories</h3>
+
+
+                    <div class="form-group">
+                        <select class="form-control" name="categoryId" id="categoryId">
+                            <option selected="true" disabled="disabled">Select Category</option>
+                            {{#each Categories}}
+                                <option value="{{_id}}">{{name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+
+                    <hr/>
+
+                    {{#if selectedCategoryId}}
+                        <h5>Select a product from category {{selectedCategoryName}}</h5>
+                        <ul class="products">
+                            {{#each from Products 'categoryId' selectedCategoryId}}
+                                <li data-product-id="{{_id}}">
+                                    <span class="name">{{name}}</span>
+                                    <span class="price">{{locale.currency.symbol}} {{pricing.selling}}</span>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    {{/if}}
+                </div>
+                <!--
+
+                    Numpad
+
+                -->
+                <div class="col-md-4">
+                    {{#if selectedProductId}}
+                        <h3 class="centered">Product: {{selectedProductName}}</h3>
+                        <div class="numPadWrapper">
+                            <div class="numPad active">
+                                <input type="number" name="quantity" id="quantity" disabled/>
+                                <div class="pad" data-number="1">1</div>
+                                <div class="pad" data-number="2">2</div>
+                                <div class="pad" data-number="3">3</div>
+                                <div class="pad" data-number="4">4</div>
+                                <div class="pad" data-number="5">5</div>
+                                <div class="pad" data-number="6">6</div>
+                                <div class="pad" data-number="7">7</div>
+                                <div class="pad" data-number="8">8</div>
+                                <div class="pad" data-number="9">9</div>
+                                {{#if categoryIsWeighable}}
+                                    <div class="pad pad-dot" data-number=".">.</div>
+                                {{else}}
+                                    <div class="pad pad-hidden">&nbsp;</div>
+                                {{/if}}
+                                <div class="pad" data-number="0">0</div>
+                                <div class="pad-clear">CLEAR</div>
+                                <div class="pad-go">ADD TO CART</div>
+                            </div>
+                        </div>
+                    {{/if}}
+                </div>
+                <!--
+
+                    Member Info & Shopping Cart
+
+                -->
+                <div class="col-md-4">
+                    <h3>Member Info</h3>
+                    <table class="memberInfo">
+                        {{#if currentMember.hasPhoto}}
+                            <tr>
+                                <td colspan="2" class="idPhoto"><img src="{{idPhoto}}" alt=""/></td>
+                            </tr>
+                        {{/if}}
+                        <tr>
+                            <td>Name</td>
+                            <td>{{currentMember.firstName}} {{#if currentMember.middleName}}{{currentMember.middleName}} {{/if}}{{currentMember.lastName}}</td>
+                        </tr>
+                        <tr>
+                            <td>ID</td>
+                            <td>{{currentMember.memberId}}</td>
+                        </tr>
+                        <tr>
+                            <td>Balance</td>
+                            <td>{{currentMember.credits}}</td>
+                        </tr>
+                    </table>
+
+                    <hr/>
+                    <h3>Shopping Cart</h3>
+
+                    {{#if cartIsEmpty}}
+                        <div class="ui stacked segment">
+                            <p>No items in the cart</p>
+                        </div>
+                    {{/if}}
+
+                    <table class="cartItemList">
+                        {{#each cartItemList}}
+                            <tr>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td><span class="name">{{name}}</span></td>
+                                            <td></td>
+                                            <td><span class="quantity">x {{quantityFor _id}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Credits:</td>
+                                            <td>{{locale.currency.symbol}}</td>
+                                            <td><span class="price">{{price}}</span></td>
+                                        </tr>
+                                        <tr><td colspan="3" class="divider"></td></tr>
+                                        <tr>
+                                            <td>Total:</td>
+                                            <td>{{locale.currency.symbol}}</td>
+                                            <td><span class="total">{{totalFor _id}}</span></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <div class="btn pull-right btn-xs btn-danger deleteItem" data-id="{{_id}}">
+                                        Remove
+                                    </div>
+                                </td>
+                            </tr>
+                        {{/each}}
+                    </table>
+
+
+                    {{#if cartTotal}}
+                        <div class="ui divider"></div>
+
+                        <div class="btn-warning btn-fluid clearCart">Clear cart</div>
+
+                        <div class="cartTotal">
+                            <div class="float left">
+                                <p>Total:</p>
+                            </div>
+                            <div class="float right">
+                                <h4>{{locale.currency.symbol}} {{cartTotal}}</h4>
+                            </div>
+                        </div>
+
+                        <div id="confirmCheckout" class="btn btn-success">Confirm</div>
+                    {{/if}}
+
+                    <div id="cancelCheckout" class="btn btn-warning">Cancel</div>
+                </div>
+            </div>
+        {{else}}
+            {{> memberSelector}}
+        {{/if}}
+	</div>
+
+</template>

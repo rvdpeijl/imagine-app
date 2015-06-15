@@ -1,0 +1,94 @@
+@padSize: 100px;
+
+.numPadWrapper {
+    position: relative;
+
+    .numPad {
+        max-width: 340px;
+        text-align: center;
+        display: inline-block;
+
+        input {
+            width: 326px;
+            position: relative;
+            left: -5px;
+            height: 85px;
+            margin-bottom: 10px;
+
+            font-size: 32px;
+            text-align: center;
+            letter-spacing: 3px;
+        }
+
+        .pad {
+            display: inline-block;
+            width: @padSize;
+            height: @padSize;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            line-height: @padSize;
+            text-align: center;
+            background-color: #78909c;
+            color: #fff;
+            font-weight: 600;
+            font-size: 20px;
+
+            cursor: pointer;
+
+            &:hover {
+                background-color: #90a4ae;
+            }
+        }
+
+        .pad-hidden {
+            opacity: 0;
+            cursor: default;
+        }
+
+
+        .pad-clear {
+            display: inline-block;
+            width: @padSize;
+            height: @padSize;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            line-height: @padSize;
+            text-align: center;
+            background-color: #ef5350;
+            color: #fff;
+            font-weight: 600;
+            font-size: 20px;
+
+            cursor: pointer;
+
+            &:hover {
+                background-color: #e57373;
+            }
+        }
+
+        .pad-go {
+            display: inline-block;
+            width: @padSize;
+            height: @padSize;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            line-height: @padSize;
+            text-align: center;
+            background-color: #9ccc65;
+            color: #fff;
+            font-weight: 600;
+            font-size: 20px;
+
+            cursor: pointer;
+
+            &:hover {
+                background-color: #aed581;
+            }
+        }
+        button.pad-go {
+            border: 0;
+            top: 2px;
+            position: relative;
+        }
+    }
+}

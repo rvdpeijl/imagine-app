@@ -1,0 +1,54 @@
+<template name="header">
+
+            <nav class="navbar" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">BLAZE &#8226; <h6 style="display: inline-block; position: relative; top: -2px;">beta v0.1.1</h6></a>
+                </div>
+
+                {{#if isAuthenticated}}
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="/members">
+                                <i class="icon mail"></i> Members
+                                <span class="label success">{{memberCount}}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/products">
+                                <i class="icon mail"></i> Products
+                                <span class="label success">{{productCount}}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/categories">
+                                <i class="icon mail"></i> Categories
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/checkout">
+                                <i class="icon calculator"></i> Checkout
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/stock">
+                                <i class="icon calculator"></i> Stock
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+                {{/if}}
+            </nav>
+
+</template>

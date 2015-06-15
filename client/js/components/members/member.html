@@ -1,0 +1,110 @@
+<template name="member">
+	{{#if currentMember}}
+        <div class="row">
+            <div class="col-md-4">
+                <div class="memberInfo">
+                    <table class="table">
+	                    <thead>
+                            <th>Member Info</th>
+	                        <th width="200"></th>
+	                    </thead>
+	                    <tbody>
+                            <tr>
+                                {{#if currentMember.hasPhoto}}
+                                    <td colspan="2" class="memberPhoto"><img src="{{idPhoto}}"
+                                             alt=""/></td>
+                                {{else}}
+                                    <td colspan="2" class="noPhoto">No photo added</td>
+                                {{/if}}
+                                <td></td>
+                            </tr>
+	                        <tr>
+	                            <td>Member ID</td>
+	                            <td>{{currentMember.memberId}}</td>
+	                        </tr>
+
+                            <tr>
+                                <td>First name</td>
+                                <td>{{currentMember.firstName}}</td>
+                            </tr>
+                            <tr>
+                                <td>Middle name</td>
+                                <td>{{currentMember.middleName}}</td>
+                            </tr>
+                            <tr>
+                                <td>Last name</td>
+                                <td>{{currentMember.lastName}}</td>
+                            </tr>
+
+                            <tr>
+                                <td>Street name</td>
+                                <td>{{currentMember.streetName}}</td>
+                            </tr>
+                            <tr>
+                                <td>House number</td>
+                                <td>{{currentMember.houseNumber}}</td>
+                            </tr>
+                            <tr>
+                                <td>Zipcode</td>
+                                <td>{{currentMember.zipcode}}</td>
+                            </tr>
+                            <tr>
+                                <td>City</td>
+                                <td>{{currentMember.city}}</td>
+                            </tr>
+
+                            <tr>
+                                <td>Email</td>
+                                <td>{{currentMember.email}}</td>
+                            </tr>
+                            <tr>
+                                <td>Inviter</td>
+                                <td>{{currentMember.inviter}}</td>
+                            </tr>
+                            <tr>
+                                <td>Notes</td>
+                                <td>{{currentMember.notes}}</td>
+                            </tr>
+
+                            <tr>
+                                <td>Date of birth</td>
+                                <td>{{currentMember.dateOfBirth}}</td>
+                            </tr>
+                            <tr>
+                                <td>Gender</td>
+                                <td>{{currentMember.gender}}</td>
+                            </tr>
+                            <tr>
+                                <td>ID Number</td>
+                                <td>{{currentMember.idNumber}}</td>
+                            </tr>
+                            <tr>
+                                <td>NIF/NIE</td>
+                                <td>{{currentMember.nifNie}}</td>
+                            </tr>
+
+                            <tr>
+                                <td>Total credits</td>
+                                <td>{{currentMember.credits}}</td>
+                            </tr>
+                            <tr>
+                                <td>Discount</td>
+                                {{#if currentMember.discountModifier}}
+                                    <td>{{currentMember.discountModifier}}%</td>
+                                {{else}}
+                                    <td>No discount</td>
+                                {{/if}}
+                            </tr>
+	                    </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="memberMenu">
+                    <h2>Add Photo</h2>
+                    {{> upload_bootstrap fileTypes='.jpg' formData=currentMember}}
+                </div>
+            </div>
+        </div>
+	{{/if}}
+</template>

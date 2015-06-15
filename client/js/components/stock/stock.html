@@ -1,0 +1,347 @@
+<template name="stock">
+	<h1>Stock</h1>
+
+    <form id="viewStock">
+        <div class="form-group">
+            <label for="productId">Select product:</label>
+            <select class="form-control" name="productId" id="productId">
+                <option value="" selected="true" disabled="disabled">Select product</option>
+			    {{#each Products}}
+                    <option value="{{_id}}">{{name}}</option>
+			    {{/each}}
+            </select>
+        </div>
+    </form>
+
+    <hr/>
+
+	{{#if currentProduct}}
+	<table class="table stock">
+		<thead>
+			<tr>
+				<th>Product name</th>
+				<th>Dispenser</th>
+				<th>Tent</th>
+				<th>Safe</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>{{currentProduct.name}}</td>
+				<td class="dispenser">
+					<table class="inner">
+						<tr>
+							<td class="small">optimal</td>
+							<td class="amount">{{currentStock.dispenser.optimal}}</td>
+						</tr>
+                        <tr>
+                            <td class="small">joints</td>
+                            <td class="amount">{{currentStock.dispenser.joints}}</td>
+                        </tr>
+                        <tr>
+                            <td class="small">inferior</td>
+                            <td class="amount">{{currentStock.dispenser.inferior}}</td>
+                        </tr>
+                        <tr>
+                            <td class="small">waste</td>
+                            <td class="amount">{{currentStock.dispenser.waste}}</td>
+                        </tr>
+					</table>
+				</td>
+				<td class="tent">
+                    <table class="inner">
+                        <tr>
+                            <td class="small">optimal</td>
+                            <td class="amount">{{currentStock.tent.optimal}}</td>
+                        </tr>
+                        <tr>
+                            <td class="small">joints</td>
+                            <td class="amount">{{currentStock.tent.joints}}</td>
+                        </tr>
+                        <tr>
+                            <td class="small">inferior</td>
+                            <td class="amount">{{currentStock.tent.inferior}}</td>
+                        </tr>
+                        <tr>
+                            <td class="small">waste</td>
+                            <td class="amount">{{currentStock.tent.waste}}</td>
+                        </tr>
+                    </table>
+				</td>
+				<td class="safe">
+                    <table class="inner">
+                        <tr>
+                            <td class="small">optimal</td>
+                            <td class="amount">{{currentStock.safe.optimal}}</td>
+                        </tr>
+                        <tr>
+                            <td class="small">joints</td>
+                            <td class="amount">{{currentStock.safe.joints}}</td>
+                        </tr>
+                        <tr>
+                            <td class="small">inferior</td>
+                            <td class="amount">{{currentStock.safe.inferior}}</td>
+                        </tr>
+                        <tr>
+                            <td class="small">waste</td>
+                            <td class="amount">{{currentStock.safe.waste}}</td>
+                        </tr>
+                    </table>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<hr/>
+
+	<div>
+        <a href="/stock/update/{{currentStock._id}}" class="btn btn-primary">Update Stock</a>
+        <a href="/stock/move/{{currentStock._id}}" class="btn btn-primary">Move Stock</a>
+        <a href="/stock/count/{{currentStock._id}}" class="btn btn-primary">Count Stock</a>
+        <a href="/stock/history/{{currentStock._id}}" class="btn btn-primary">Stock History</a>
+    </div>
+
+	{{/if}}
+
+    <hr/>
+
+	<div class="partials">
+		{{#if updatingStock}}
+            <form id="updateStock">
+                <h3>Update Stock</h3>
+                <input type="hidden" name="stockId" value="{{currentStock._id}}"/>
+                <table class="table stock updateStock">
+                    <thead>
+                    <tr>
+                        <th>Dispenser</th>
+                        <th>Tent</th>
+                        <th>Safe</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="dispenser">
+                            <table class="inner">
+                                <tr>
+                                    <td class="small">optimal</td>
+                                    <td class="amount form-group">
+                                        <input type="text"
+                                               name="updateDispenserOptimal"
+                                               id="updateDispenserOptimal"
+                                               class="form-control"
+                                               value="{{currentStock.dispenser.optimal}}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="small">joints</td>
+                                    <td class="amount form-group">
+                                        <input type="text"
+                                               name="updateDispenserJoints"
+                                               id="updateDispenserJoints"
+                                               class="form-control"
+                                               value="{{currentStock.dispenser.joints}}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="small">inferior</td>
+                                    <td class="amount form-group">
+                                        <input type="text"
+                                               name="updateDispenserInferior"
+                                               id="updateDispenserInferior"
+                                               class="form-control"
+                                               value="{{currentStock.dispenser.inferior}}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="small">waste</td>
+                                    <td class="amount form-group">
+                                        <input type="text"
+                                               name="updateDispenserWaste"
+                                               id="updateDispenserWaste"
+                                               class="form-control"
+                                               value="{{currentStock.dispenser.waste}}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="tent">
+                            <table class="inner">
+                                <tr>
+                                    <td class="small">optimal</td>
+                                    <td class="amount form-group">
+                                        <input type="text"
+                                               name="updateTentOptimal"
+                                               id="updateTentOptimal"
+                                               class="form-control"
+                                               value="{{currentStock.tent.optimal}}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="small">joints</td>
+                                    <td class="amount form-group">
+                                        <input type="text"
+                                               name="updateTentJoints"
+                                               id="updateTentJoints"
+                                               class="form-control"
+                                               value="{{currentStock.tent.joints}}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="small">inferior</td>
+                                    <td class="amount form-group">
+                                        <input type="text"
+                                               name="updateTentInferior"
+                                               id="updateTentInferior"
+                                               class="form-control"
+                                               value="{{currentStock.tent.inferior}}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="small">waste</td>
+                                    <td class="amount form-group">
+                                        <input type="text"
+                                               name="updateTentWaste"
+                                               id="updateTentWaste"
+                                               class="form-control"
+                                               value="{{currentStock.tent.waste}}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="safe">
+                            <table class="inner">
+                                <tr>
+                                    <td class="small">optimal</td>
+                                    <td class="amount form-group">
+                                        <input type="text"
+                                               name="updateSafeOptimal"
+                                               id="updateSafeOptimal"
+                                               class="form-control"
+                                               value="{{currentStock.safe.optimal}}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="small">joints</td>
+                                    <td class="amount form-group">
+                                        <input type="text"
+                                               name="updateSafeJoints"
+                                               id="updateSafeJoints"
+                                               class="form-control"
+                                               value="{{currentStock.safe.joints}}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="small">inferior</td>
+                                    <td class="amount form-group">
+                                        <input type="text"
+                                               name="updateSafeInferior"
+                                               id="updateSafeInferior"
+                                               class="form-control"
+                                               value="{{currentStock.safe.inferior}}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="small">waste</td>
+                                    <td class="amount form-group">
+                                        <input type="text"
+                                               name="updateSafeWaste"
+                                               id="updateSafeWaste"
+                                               class="form-control"
+                                               value="{{currentStock.safe.waste}}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div>
+                    <button class="btn btn-primary pull-right">Update</button>
+                </div>
+            </form>
+		{{/if}}
+
+		{{#if movingStock}}
+            <form id="moveStock">
+	            <h3>Move stock</h3>
+                <table class="table stock moveStock">
+                    <thead>
+                    <tr>
+                        <th>Dispenser</th>
+                        <th>Tent</th>
+                        <th>Safe</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="dispenser">
+                            <table class="inner">
+								{{#each arrayify currentStock.dispenser}}
+                                    <tr data-stock-type="dispenser" data-quality="{{name}}" data-amount="{{value}}" data-stock-id="{{currentStock._id}}">
+                                        <td class="small">{{name}}</td>
+                                        <td class="amount">{{value}}</td>
+                                    </tr>
+								{{/each}}
+                            </table>
+                        </td>
+                        <td class="tent">
+                            <table class="inner">
+								{{#each arrayify currentStock.tent}}
+                                    <tr data-stock-type="tent" data-quality="{{name}}" data-amount="{{value}}" data-stock-id="{{currentStock._id}}">
+                                        <td class="small">{{name}}</td>
+                                        <td class="amount">{{value}}</td>
+                                    </tr>
+								{{/each}}
+                            </table>
+                        </td>
+                        <td class="safe">
+                            <table class="inner">
+								{{#each arrayify currentStock.safe}}
+                                    <tr data-stock-type="safe" data-quality="{{name}}" data-amount="{{value}}" data-stock-id="{{currentStock._id}}">
+                                        <td class="small">{{name}}</td>
+                                        <td class="amount">{{value}}</td>
+                                    </tr>
+								{{/each}}
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+		{{/if}}
+
+		{{#if countingStock}}
+			<h3>Count stock</h3>
+            <form id="countStock" style="display: block; width: 500px; margin: auto;">
+                <table class="table stock countStock">
+                    <thead>
+                    <tr>
+                        <th>Dispenser</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="dispenser">
+                            <table class="inner">
+                                {{#each arrayify currentStock.dispenser}}
+                                    <tr data-stock-type="dispenser">
+                                        <td class="small">{{name}}</td>
+                                        <td class="amount"><input type="number" value="{{value}}"/></td>
+                                    </tr>
+                                {{/each}}
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <button class="btn btn-primary pull-right">Count Stock</button>
+            </form>
+		{{/if}}
+
+		{{#if stockHistory}}
+			<h3>Stock history</h3>
+            stock history yay!!!!
+		{{/if}}
+	</div>
+
+</template>

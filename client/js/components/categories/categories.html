@@ -1,0 +1,48 @@
+<template name="categories">
+	<h3>New category</h3>
+    <form id="newCategory">
+	    <div class="form-group">
+            <label for="categoryName">Category name *</label>
+            <input type="text" name="categoryName" id="categoryName" class="form-control" placeholder="Category name" />
+	    </div>
+        <div class="form-group">
+            <label for="weighable">Weighable *</label>
+            <select class="form-control" name="weighable" id="weighable">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+        </div>
+	    <button class="btn btn-primary">Add Category</button>
+    </form>
+
+    <hr/>
+
+	<h3>Categories</h3>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th width="100">Weighable</th>
+				<th width="100"></th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each Categories}}
+	            <tr>
+		            <td>{{name}}</td>
+		            <td>
+		                {{#if options.weighable}}
+		                    Yes
+		                {{else}}
+		                    No
+		                {{/if}}
+		            </td>
+		            <td><button class="btn btn-xs btn-warning removeCategory" data-id="{{_id}}">Delete</button></td>
+	            </tr>
+			{{/each}}
+		</tbody>
+	</table>
+	<ul>
+
+	</ul>
+</template>
